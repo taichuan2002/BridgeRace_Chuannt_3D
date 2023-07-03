@@ -57,6 +57,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scrips\Brick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+    <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+    <Compile Include="Assets\Scrips\CameraFollow.cs" />
+    <Compile Include="Assets\Scrips\PlayerController.cs" />
+    <Compile Include="Assets\QuarterView 3D Action BE5\ReadMe\Scripts\ReadmeBE5.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
