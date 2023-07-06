@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private Animator _anim;
     [SerializeField] private float speed;
-   
+    [SerializeField] private LayerMask layer;
+
+
+    [SerializeField] public GameObject brickBluePrefab;
+    [SerializeField] public GameObject unbrickBluePrefab;
+    [SerializeField] private List<GameObject> cloneBrick = new List<GameObject>();
+
+
+    [SerializeField] private int countBrick;
+    [SerializeField] private Transform unBrick;
+    [SerializeField] private GameObject unBridge;
+    [SerializeField] private GameObject Bridge;
+
+
+    private float brickHeight = 1f;
+
+
+    private void Update()
+    {
+        CheckBrick();
+    }
     private void FixedUpdate()
     {
         rb.velocity = new Vector3(_joystick.Horizontal * speed, rb.velocity.y, _joystick.Vertical * speed);
@@ -20,7 +40,51 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //_anim.SetBool("isRunning", false);
+            //xe_anim.SetBool("isRunning", false);
+        }
+       
+    }
+
+
+    IEnumerator RespawnObject(GameObject objectPrefab, Vector3 position, float minDelay, float maxDelay)
+    {
+        yield return new WaitForSeconds(Random.Range(minDelay, maxDelay));
+        GameObject newObject = Instantiate(objectPrefab, position, Quaternion.identity);
+    }
+    private void CheckBrick()
+    {
+        RaycastHit hit;
+        Vector3 origin = transform.position + new Vector3(0, 0.5f, 0.4f);
+        Debug.DrawRay(origin, Vector3.down, Color.blue, 10f);
+        if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, layer))
+        {
+            if (hit.collider.CompareTag("brickB"))
+            {
+                countBrick++;
+                Destroy(hit.transform.gameObject);
+                GameObject newBrick = Instantiate(unbrickBluePrefab, transform);
+                newBrick.transform.position = new Vector3(unBrick.position.x, brickHeight, unBrick.position.z);
+                brickHeight += 0.1f;
+                cloneBrick.Add(newBrick);
+                StartCoroutine(RespawnObject(brickBluePrefab, hit.transform.position, 3f, 5f));
+            }
+        }
+        if (Physics.Raycast(origin, transform.position, out hit, 2f))
+        {
+            if (hit.collider.CompareTag("unBrickB"))
+            {
+                if(cloneBrick.Count > 0)
+                {
+                    GameObject lastBrick = cloneBrick[cloneBrick.Count - 1];
+                    Destroy(lastBrick.transform.gameObject);
+                    unBridge.transform.position = new Vector3(unBridge.transform.position.x, unBridge.transform.position.y + 0.2f, unBridge.transform.position.z + 0.5f);
+                    cloneBrick.RemoveAt(cloneBrick.Count -1);
+                    GameObject line = Instantiate(unbrickBluePrefab, new Vector3(unBridge.transform.position.x , unBridge.transform.position.y, unBridge.transform.position.z - 0.6f ), Quaternion.Euler(-25, 0, 0));
+
+
+                }
+            }
         }
     }
+   
 }

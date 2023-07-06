@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4462523135328065168}
+  - component: {fileID: 1531724892}
   - component: {fileID: 1531724893}
   - component: {fileID: 1531724890}
-  - component: {fileID: 1531724892}
   m_Layer: 0
   m_Name: Enemy A
   m_TagString: Untagged
@@ -35,6 +35,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531724892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328409505970683906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18ce1056c4bf4641bbff38261414a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1531724893}
+  _joystick: {fileID: 0}
+  _anim: {fileID: 0}
+  speed: 5
+  layer:
+    serializedVersion: 2
+    m_Bits: 64
+  brickBluePrefab: {fileID: 0}
+  unbrickBluePrefab: {fileID: 0}
+  cloneBrick: []
+  countBrick: 0
 --- !u!54 &1531724893
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62,24 +85,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.641467, y: 2.4051814, z: 1}
-  m_Center: {x: 0.08003612, y: 1.1929163, z: 0}
---- !u!114 &1531724892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328409505970683906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18ce1056c4bf4641bbff38261414a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1531724893}
-  _joystick: {fileID: 0}
-  _anim: {fileID: 0}
-  speed: 5
+  m_Size: {x: 2.641467, y: 2.929892, z: 1}
+  m_Center: {x: 0.08003612, y: 1.369167, z: 0}
 --- !u!1001 &4830895522237710593
 PrefabInstance:
   m_ObjectHideFlags: 0
