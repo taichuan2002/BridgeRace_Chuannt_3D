@@ -10,17 +10,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask layer;
+    [SerializeField] private Vector3[] brickW;
 
 
     [SerializeField] public GameObject brickBluePrefab;
     [SerializeField] public GameObject unbrickBluePrefab;
     [SerializeField] private List<GameObject> cloneBrick = new List<GameObject>();
+    [SerializeField] private List<GameObject> uncloneBrick = new List<GameObject>();
 
 
     [SerializeField] private int countBrick;
     [SerializeField] private Transform unBrick;
     [SerializeField] private GameObject unBridge;
-    [SerializeField] private GameObject Bridge;
 
 
     private float brickHeight = 1f;
@@ -77,12 +78,16 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject lastBrick = cloneBrick[cloneBrick.Count - 1];
                     Destroy(lastBrick.transform.gameObject);
-                    unBridge.transform.position = new Vector3(unBridge.transform.position.x, unBridge.transform.position.y + 0.2f, unBridge.transform.position.z + 0.5f);
+                    unBridge.transform.position = new Vector3(unBridge.transform.position.x, unBridge.transform.position.y + 0.1f, unBridge.transform.position.z + 0.3f);
                     cloneBrick.RemoveAt(cloneBrick.Count -1);
-                    GameObject line = Instantiate(unbrickBluePrefab, new Vector3(unBridge.transform.position.x , unBridge.transform.position.y, unBridge.transform.position.z - 0.6f ), Quaternion.Euler(-25, 0, 0));
-
-
+                    GameObject line = Instantiate(unbrickBluePrefab, new Vector3(unBridge.transform.position.x , unBridge.transform.position.y - 0.5f, unBridge.transform.position.z - 0.6f ), Quaternion.Euler(0, 0, 0));
+                    uncloneBrick.Add(lastBrick);
                 }
+                if(uncloneBrick.Count == 20)
+                {
+                    unBridge.SetActive(false);
+                }
+                
             }
         }
     }
